@@ -1,0 +1,21 @@
+# SieMarketDemo
+
+This project is a small C# console demo that models an online electronics store scenario.
+
+I implemented the domain model using Customer and CustomerId, Order and OrderId, and OrderItem. 
+An Order contains one customer and a list of order items. Each OrderItem stores product name, quantity,
+unit price at purchase time, and can compute its line total.
+
+The order price calculation follows the required discount rule. The subtotal is computed as the sum of all item 
+line totals. A discount policy is applied so that if the subtotal is greater than 500 EUR, a 
+10 percent discount is applied to the entire order. I kept the discount logic in a separate policy 
+class to make the rule easy to change without modifying the Order class.
+
+For analytics, I added a method that finds the top spender customer by grouping orders per customer and 
+summing the final prices across all their orders. I also added the bonus method that returns popular products 
+together with the total quantity sold by aggregating all items across all orders and grouping them by product name.
+
+In Program.cs I created multiple customers and a larger set of test orders to cover different scenarios like 
+orders under 500, exactly 500, and over 500, and repeated products across different orders.
+The console output prints per-order details, totals per customer, the top spender, and the popular products list, 
+including a sanity check that validates the aggregated quantities.
