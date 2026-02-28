@@ -1,0 +1,51 @@
+In my class diagram, I model a coffee shop ordering system.
+CoffeeShop
+A CoffeeShop represents one store.
+One coffee shop has many baristas and it also receives many orders.
+
+Barista
+A Barista is an employee who prepares orders.
+One barista can prepare many orders, but each order is prepared by one barista (or it can be not assigned yet).
+
+Customer + LoyaltyAccount
+A Customer can place many orders.
+Each customer has one LoyaltyAccount.
+
+The LoyaltyAccount stores:
+the membership type: Regular or Gold
+the current points balance
+
+Regular earns 1 point per 1 euro, Gold earns 2 points per 1 euro.
+Customers can also redeem points to get free drinks.
+
+Order
+An Order stores:
+timestamp (when it was created)
+status (created / preparing / completed)
+total price
+earned points
+
+An order contains many OrderItems.
+OrderItem
+An OrderItem is one line in the order:
+which drink (MenuItem)
+which size (Small/Medium/Large)
+quantity
+chosen extras
+
+For efficiency, I store “snapshot prices” in OrderItem:
+base price
+extras price
+line total
+
+This keeps the order correct even if menu prices change later.
+
+MenuItem + MenuItemPrice
+
+A MenuItem is a drink type: Espresso, Latte, Cappuccino.
+Each menu item has 3 prices, one per size, stored in MenuItemPrice.
+
+Extra
+
+An Extra is an add-on like extra shot, vanilla syrup, etc.
+One order item can have many extras, and the same extra can be used in many order items.
