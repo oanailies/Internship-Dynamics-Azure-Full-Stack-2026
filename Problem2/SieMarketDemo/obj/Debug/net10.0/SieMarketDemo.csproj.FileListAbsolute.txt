@@ -1,0 +1,14 @@
+C:\Users\Oana\Desktop\SieMarketDemo\bin\Debug\net10.0\SieMarketDemo.exe
+C:\Users\Oana\Desktop\SieMarketDemo\bin\Debug\net10.0\SieMarketDemo.deps.json
+C:\Users\Oana\Desktop\SieMarketDemo\bin\Debug\net10.0\SieMarketDemo.runtimeconfig.json
+C:\Users\Oana\Desktop\SieMarketDemo\bin\Debug\net10.0\SieMarketDemo.dll
+C:\Users\Oana\Desktop\SieMarketDemo\bin\Debug\net10.0\SieMarketDemo.pdb
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.AssemblyInfoInputs.cache
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.AssemblyInfo.cs
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.csproj.CoreCompileInputs.cache
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.dll
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\refint\SieMarketDemo.dll
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.pdb
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\SieMarketDemo.genruntimeconfig.cache
+C:\Users\Oana\Desktop\SieMarketDemo\obj\Debug\net10.0\ref\SieMarketDemo.dll
