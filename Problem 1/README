@@ -1,51 +1,46 @@
+Class Diagram (UML)
 In my class diagram, I model a coffee shop ordering system.
-CoffeeShop
-A CoffeeShop represents one store.
-One coffee shop has many baristas and it also receives many orders.
 
-Barista
-A Barista is an employee who prepares orders.
-One barista can prepare many orders, but each order is prepared by one barista (or it can be not assigned yet).
+A CoffeeShop represents one store. One coffee shop has many baristas and it receives many orders, because multiple customers can order in the same location.
 
-Customer + LoyaltyAccount
-A Customer can place many orders.
-Each customer has one LoyaltyAccount.
+A Barista is an employee who prepares orders. One barista can prepare many orders, but each order is prepared by one barista. Sometimes the order can 
+be not assigned yet, so the barista can be optional until the order is taken.
 
-The LoyaltyAccount stores:
-the membership type: Regular or Gold
-the current points balance
-
-Regular earns 1 point per 1 euro, Gold earns 2 points per 1 euro.
+A Customer can place many orders. Each customer has one LoyaltyAccount. The LoyaltyAccount stores the membership type, Regular or Gold, 
+and the current points balance. Regular customers earn 1 point per 1 euro spent and Gold customers earn 2 points per 1 euro spent. 
 Customers can also redeem points to get free drinks.
 
-Order
-An Order stores:
-timestamp (when it was created)
-status (created / preparing / completed)
-total price
-earned points
+An Order stores the timestamp when it was created, the status (created, preparing, completed, cancelled), the total price, and the earned points. 
+Each order belongs to one coffee shop and one customer, and it can be assigned to one barista. An order contains many OrderItems.
 
-An order contains many OrderItems.
-OrderItem
-An OrderItem is one line in the order:
-which drink (MenuItem)
-which size (Small/Medium/Large)
-quantity
-chosen extras
-
-For efficiency, I store “snapshot prices” in OrderItem:
-base price
-extras price
-line total
-
+An OrderItem is one line in the order. It stores which drink was ordered (MenuItem), which size (Small/Medium/Large), the quantity, and the chosen extras. 
+For efficiency, I store snapshot prices inside OrderItem: the base price, the extras price, and the line total. 
 This keeps the order correct even if menu prices change later.
 
-MenuItem + MenuItemPrice
+A MenuItem is a drink type like Espresso, Latte, or Cappuccino. Each menu item has three prices, one for each size, stored in MenuItemPrice.
 
-A MenuItem is a drink type: Espresso, Latte, Cappuccino.
-Each menu item has 3 prices, one per size, stored in MenuItemPrice.
-
-Extra
-
-An Extra is an add-on like extra shot, vanilla syrup, etc.
+An Extra is an add-on like extra shot, vanilla syrup, caramel syrup, or whipped cream. 
 One order item can have many extras, and the same extra can be used in many order items.
+
+
+Database Diagram (ERD)
+In the database diagram, I translate the same model into tables with primary keys and foreign keys.
+
+I store the stores in a CoffeeShop table with shop_id as primary key, plus name and address. 
+Baristas are stored in a Barista table with barista_id as primary key and shop_id as foreign key, because each barista works in one coffee shop, while one coffee shop has many baristas.
+
+Customers are stored in a Customer table with customer_id as primary key, full_name, and email. 
+Loyalty is stored in a LoyaltyAccount table with loyalty_id as primary key and customer_id as a foreign key that is also unique, 
+so each customer has exactly one loyalty account. In the loyalty table I store the tier (Regular or Gold) and the points_balance.
+
+The menu is stored in MenuItem, where each drink type has menu_item_id as primary key and a name. 
+The size-based pricing is stored in MenuItemPrice, where I keep menu_item_id as a foreign key, size (Small/Medium/Large), and price. 
+I also keep a unique constraint on (menu_item_id, size) so each drink has exactly one price per size. Extras are stored in an Extra table 
+with extra_id as primary key, name, and additional_cost.
+
+Orders are stored in an Orders table with order_id as primary key. It has shop_id and customer_id as foreign keys, 
+and barista_id as a foreign key that can be null until the order is assigned. It also stores the order timestamp, status, total_price, and earned_points.
+
+Each item inside an order is stored in OrderItem with order_item_id as primary key. It has order_id as a foreign key, menu_item_id as a foreign key, size, and quantity. For efficiency and correct history, I store snapshot pricing fields on OrderItem: unit_base_price, unit_extras_price, and line_total.
+
+Because an order item can have multiple extras and an extra can appear in many order items, I use a junction table OrderItemExtra with a composite primary key (order_item_id, extra_id). Optionally, I also store extra_cost_at_time to snapshot the extra price as well.
